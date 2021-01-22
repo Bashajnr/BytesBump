@@ -4,7 +4,7 @@ from discord.ext import tasks
 
 commands = discord.ext.commands
 emoji = Files.emoji
-
+#e
 class General(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
@@ -51,25 +51,7 @@ class General(commands.Cog):
     .set_footer(text=f"Owned by {owners}")
     .set_thumbnail(url=self.bot.user.avatar_url_as(static_format="png")))
 
-  @commands.Cog.listener()
-  async def on_command_error(self, ctx, error):
-    if isinstance(error, commands.CommandOnCooldown):
-      seconds = round(error.retry_after)
-      hours = seconds//3600
-      seconds %= 3600
-      minutes = seconds//60
-      seconds %= 60
-      if hours == 0:
-        if minutes == 0:
-          d = f"{seconds} seconds"
-        else:
-          d = f"{minutes} minutes and {seconds} seconds"
-      else:
-        d = f"{hours} hours, {minutes} minutes, and {seconds} seconds"
-      return await ctx.send(embed=discord.Embed(
-        description=f"{emoji('warn')} You are on cooldown! Try again in **{d}**!",
-        color=discord.Color.orange()
-      ))
+    #removed old error handler in favor for new one, cog was added
 
 def setup(bot):
   bot.add_cog(General(bot))
